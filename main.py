@@ -522,18 +522,18 @@ def set_user_list():
         users_list.append(user["owner_id"])
     return users_list
     # return users_list
-    # {   'taxi': None, 
-    #     'starters': ['6770', '3164', '4199', '4131', '1689', '2449', '515', '6130', '2749', '59', 'GB'], 
-    #     'settings': {'wins': 0, 'waiver_position': 8, 'waiver_budget_used': 0, 'total_moves': 0, 'ties': 0, 'losses': 0, 'fpts': 0}, 
-    #     'roster_id': 11, 
-    #     'reserve': None, 
-    #     'players': ['1689', '2331', '2449', '2749', '3164', '333', '4131', '4199', '4973', '515', '5185', '59', '5955', '6130', '6156', '6768', '6770', '6801', '6828', 'GB'], 
-    #     'player_map': None, 
-    #     'owner_id': '435547320281460736', 
+    # {   'taxi': None,
+    #     'starters': ['6770', '3164', '4199', '4131', '1689', '2449', '515', '6130', '2749', '59', 'GB'],
+    #     'settings': {'wins': 0, 'waiver_position': 8, 'waiver_budget_used': 0, 'total_moves': 0, 'ties': 0, 'losses': 0, 'fpts': 0},
+    #     'roster_id': 11,
+    #     'reserve': None,
+    #     'players': ['1689', '2331', '2449', '2749', '3164', '333', '4131', '4199', '4973', '515', '5185', '59', '5955', '6130', '6156', '6768', '6770', '6801', '6828', 'GB'],
+    #     'player_map': None,
+    #     'owner_id': '435547320281460736',
     #     'metadata': {
     #                     'allow_pn_scoring': 'on'
-    #                 }, 
-    #     'league_id': '589203992786018304', 
+    #                 },
+    #     'league_id': '589203992786018304',
     #     'co_owners': None
     # }
 
@@ -604,14 +604,17 @@ def tweet_scores(client, num_matchups):
                 second_points = float(points)
                 if first_points > second_points:
                     tweet = first + " def. " + second + ": " + \
-                        str(int(first_points)) + " - " + str(int(second_points)) + "\n\n"
+                        str(int(first_points)) + " - " + \
+                        str(int(second_points)) + "\n\n"
 
                 elif first_points < second_points:
                     tweet = second + " def. " + first + ": " + \
-                        str(int(second_points)) + " - " + str(int(first_points)) + "\n\n"
+                        str(int(second_points)) + " - " + \
+                        str(int(first_points)) + "\n\n"
 
                 else:
-                    tweet = first + " & " + second + " tied: " + first_points + " - " + second_points + "\n\n"
+                    tweet = first + " & " + second + " tied: " + \
+                        first_points + " - " + second_points + "\n\n"
 
         full_tweet = full_tweet + tweet
     week = get_week()
@@ -644,7 +647,7 @@ def send_tweet(message, num, total):
                 message = f"({num}/{total})\n" + message
             api.update_status(message)
     except tweepy.TweepError as e:
-            print(e.reason)
+        print(e.reason)
 
 
 ########## Scheduler ###########
@@ -653,10 +656,10 @@ print(time.ctime())
 
 schedule.every().day.at("07:30").do(set_point_leaders)
 schedule.every().day.at("07:00").do(set_standings)
-schedule.every().monday.at("02:00").do(update_week)
+# schedule.every().monday.at("02:00").do(update_week)
 schedule.every().monday.at("03:00").do(clear_vars)
 schedule.every().tuesday.at("06:00").do(set_roster_data)
-schedule.every().tuesday.at("08:01").do(weekly_scores)
+# schedule.every().tuesday.at("08:01").do(weekly_scores)
 schedule.every().tuesday.at("16:01").do(set_standings)
 schedule.every().thursday.at("17:35").do(set_active_players)
 
